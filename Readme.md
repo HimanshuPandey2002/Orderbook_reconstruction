@@ -10,13 +10,17 @@ a live view of the top 10 price levels on both bid and ask sides.
 ## COMPILATION
 
 To build the executable:
-make
+`make`
 
 To clean build artifacts:
-make clean
+`make clean`
+
+Compile and run unit tests
+`g++ -std=c++17 -O3 -o test_runner src/test.cpp src/orderbook.cpp
+./test_runner`
 
 To run test with sample data:
-make test
+`make test`
 
 ## USAGE
 
