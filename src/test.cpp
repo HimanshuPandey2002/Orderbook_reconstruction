@@ -85,7 +85,7 @@ void test_cancel_orders() {
 }
 
 void test_trade_handling() {
-    cout << "Testing trade handling..." << endl;
+    std::cout << "Testing trade handling..." << std::endl;
     
     OrderBook book;
     
@@ -93,8 +93,8 @@ void test_trade_handling() {
     book.addOrder('B', 10.50, 100, 1001);
     book.addOrder('A', 10.75, 150, 1002);
     
-    // Simulate a trade that hits the ask side
-    book.handleTrade('A', 10.75, 50);  // Should remove 50 from ask side
+    // Simulate a trade that hits the ask side (removes liquidity from asks)
+    book.handleTrade('A', 10.75, 50);  // Remove 50 from ask side at 10.75
     
     MBORecord dummy_mbo = {};
     dummy_mbo.action = 'T';
@@ -105,11 +105,15 @@ void test_trade_handling() {
     
     MBPRecord mbp = book.generateMBP(dummy_mbo);
     
-    // Ask size should be reduced to 100
+    // Ask size should be reduced to 100 (150 - 50 = 100)
     assert(mbp.ask_prices[0] == 10.75);
     assert(mbp.ask_sizes[0] == 100);  // 150 - 50 = 100
     
-    cout << "✓ Trade handling test passed" << endl;
+    // Bid should remain unchanged
+    assert(mbp.bid_prices[0] == 10.50);
+    assert(mbp.bid_sizes[0] == 100);
+    
+    std::cout << "✓ Trade handling test passed" << std::endl;
 }
 
 void test_csv_parsing() {
