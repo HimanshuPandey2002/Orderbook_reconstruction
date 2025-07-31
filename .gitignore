@@ -1,0 +1,40 @@
+# Compiled binaries
+reconstruction_*
+test_runner
+*.o
+*.exe
+
+# Output files
+output_mbp.csv
+*.out
+
+# Debug files
+*.dSYM/
+*.gdb_history
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Build directories
+build/
+bin/
+obj/
+
+# Profiling files
+gmon.out
+*.prof
+
+# Log files
+*.log
