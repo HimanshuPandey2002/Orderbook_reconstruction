@@ -89,14 +89,6 @@ Output will be written to "output_mbp.csv" in the same directory.
 - Invalid price/size data protection
 - Missing order_id handling for cancellations
 
-## PERFORMANCE BENCHMARKS
-
-Tested on Intel i7 @ 3.2GHz:
-
-- 100K records: ~150ms processing time
-- 1M records: ~1.8s processing time
-- Memory usage: ~50MB for 1M records
-
 ## POTENTIAL IMPROVEMENTS
 
 1. Memory pool allocation for frequent small objects
