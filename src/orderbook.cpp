@@ -41,16 +41,18 @@ void OrderBook::cancelOrder(long order_id, char side, double price, int size) {
 
 void OrderBook::handleTrade(char side, double price, int size) {
     // For trades, we remove liquidity from the book
-    // The side in the MBO data might be incorrect, so we need to check both sides
-    if (side == 'B' && asks.count(price)) {
-        // Trade hit the ask side
+    // The trade removes quantity from the side where the resting order was
+    if (side == 'A' && asks.count(price)) {
+        // Trade removes from ask side
         asks[price].first -= size;
+        asks[price].second = std::max(0, asks[price].second - 1); // Reduce order count
         if (asks[price].first <= 0) {
             asks.erase(price);
         }
-    } else if (side == 'A' && bids.count(price)) {
-        // Trade hit the bid side
+    } else if (side == 'B' && bids.count(price)) {
+        // Trade removes from bid side
         bids[price].first -= size;
+        bids[price].second = std::max(0, bids[price].second - 1); // Reduce order count
         if (bids[price].first <= 0) {
             bids.erase(price);
         }
